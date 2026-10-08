@@ -1,92 +1,88 @@
 <!doctype html>
-<html lang="ko">
-<head>
+<html lang="ko"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f5efe4"><title>연희의 작은 발견 | PHOTO BINGO</title>
+<meta name="theme-color" content="#ede3d4"><title>연희의 작은 발견 | PHOTO BINGO</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap');
-:root{--paper:#f5efe4;--ink:#544638;--muted:#8c7c6a;--line:#cfc1ad;--accent:#aa795a;--selected:#d8c5a8}*{box-sizing:border-box}body{margin:0;background:#e9e0d3;color:var(--ink);font-family:'Gowun Dodum',sans-serif;min-height:100vh;padding:22px 14px 36px}.sheet{max-width:470px;margin:auto;background:var(--paper);border:1px solid #d8caba;box-shadow:0 8px 28px #4e3b2a22;padding:25px 21px 22px;position:relative;background-image:repeating-linear-gradient(0deg,transparent,transparent 31px,#9e8c7820 32px)}.topline{font-size:11px;letter-spacing:3px;color:var(--muted);text-align:center}.hero{text-align:center;margin:8px 0 18px}.hero h1{font-family:'Nanum Pen Script',cursive;font-size:49px;line-height:1.05;margin:8px 0 0;font-weight:400}.hero p{font-size:12px;letter-spacing:2px;margin:5px 0}.doodle{font-size:23px;letter-spacing:13px;color:#9a8067}.rule{height:1px;background:var(--line);margin:17px 0}.stats{display:flex;justify-content:space-between;gap:8px;text-align:center;margin-bottom:16px}.stat{flex:1;border:1px solid var(--line);background:#fffaf2b5;padding:9px 4px}.stat strong{display:block;font-size:23px;font-weight:500}.stat span{font-size:11px;color:var(--muted)}.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.tile{aspect-ratio:1/1;background:#fffbf3;border:1px solid #cfc0ad;border-radius:2px;box-shadow:1px 2px 0 #b7a89440;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;position:relative;color:var(--ink);font:inherit;cursor:pointer;padding:7px;transition:background .15s,transform .15s;touch-action:manipulation}.tile:active{transform:scale(.97)}.tile[aria-pressed=true]{background:var(--selected);border-color:#a99173}.tile .symbol{font-size:22px;filter:saturate(.65)}.tile .word{font-size:clamp(12px,3.3vw,15px);line-height:1.4;word-break:keep-all;font-weight:bold}.tile .check{position:absolute;right:5px;top:3px;font-size:16px;color:#7d5940;font-weight:bold}.progress-track{height:8px;background:#e4d8c7;border:1px solid #cfc1ad;border-radius:10px;overflow:hidden;margin:-4px 0 14px}.progress-fill{height:100%;width:0;background:#9c8065;transition:width .2s ease}.note{text-align:center;font-size:12px;color:var(--muted);margin:18px 0 6px}.complete{text-align:center;min-height:27px;color:#916341;font-family:'Nanum Pen Script',cursive;font-size:26px}.actions{display:flex;gap:8px;margin-top:13px}.actions button{flex:1;background:transparent;border:1px solid #b6a28b;color:var(--ink);padding:11px 8px;font:inherit;font-size:12px;cursor:pointer}.actions button.primary{background:#665342;color:#fff8ed;border-color:#665342}.footer{text-align:center;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:24px}.tip{max-width:470px;margin:16px auto 0;text-align:center;font-size:12px;color:#756554;line-height:1.8}.confetti{animation:pop .35s ease-out}@keyframes pop{50%{transform:scale(1.04)}}@media(min-width:600px){body{padding-top:40px}.sheet{padding:32px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
-</head>
-<body>
-<main class="sheet" id="sheet">
- <div class="topline">A LITTLE PHOTO WALK · 2026</div>
- <header class="hero"><div class="doodle" aria-hidden="true">✳︎ ♡ ✳︎</div><h1>연희의 작은 발견</h1><p>YEONHUI PHOTO WALK · BINGO</p></header>
- <div class="rule"></div>
- <section class="stats" aria-label="빙고 진행 상황"><div class="stat"><strong id="done">0 / 9</strong><span>촬영 완료</span></div><div class="stat"><strong id="lines">0</strong><span>완성된 빙고</span></div><div class="stat"><strong id="percent">0%</strong><span>진행률</span></div></section>
- <section id="board" class="board" aria-label="골목 출사 빙고판">
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">⌂</span><span class="word">오래된 간판</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">☀</span><span class="word">햇살 한 조각</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">♥</span><span class="word">빨간 포인트</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">✉</span><span class="word">누군가의 취향</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">❀</span><span class="word">담장 너머 초록</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">№</span><span class="word">작은 글씨</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">♧</span><span class="word">나란히 둘</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">◈</span><span class="word">시간의 흔적</span><span class="check" aria-hidden="true"></span></button>
-  <button type="button" class="tile" aria-pressed="false"><span class="symbol" aria-hidden="true">✧</span><span class="word">우연한 만남</span><span class="check" aria-hidden="true"></span></button>
+@font-face{font-family:Griun;src:url('./Griun_Offoffonoff.ttf') format('truetype');font-display:swap}
+:root{--ink:#53453b;--muted:#827467;--line:#c5b5a2;--selected:#c9c4a7}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:25px 15px 38px;background:#d9c9bb url('./autumn-stripes.jpg') center top/auto 1000px repeat;color:var(--ink);font-family:Griun,'Apple SD Gothic Neo',sans-serif}
+.sheet{max-width:470px;margin:auto;background:rgba(250,246,235,.95);border:1px solid #e6d9c5;box-shadow:0 10px 34px #44312335;padding:26px 20px 24px;position:relative}
+.topline{text-align:center;font-size:12px;letter-spacing:2px;color:var(--muted)}
+.hero{text-align:center;margin:13px 0 18px}
+.hero h1{font-size:clamp(34px,9vw,46px);font-weight:400;line-height:1.3;margin:5px 0}
+.hero p{font-size:12px;letter-spacing:1.5px;margin:3px 0}
+.doodle{font-size:22px;letter-spacing:12px;color:#95806d}
+.rule{height:1px;background:var(--line);margin:18px 0}
+.stats{display:flex;gap:8px;text-align:center;margin-bottom:17px}
+.stat{flex:1;min-width:0;border:1px solid #d4c5b1;background:#fffaf0b8;padding:9px 3px}
+.stat strong{display:block;font-size:25px;font-weight:400}
+.stat span{font-size:12px;color:var(--muted)}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.tile{aspect-ratio:1/1;min-width:0;background:#fffbf2;border:1px solid #d0c0ae;box-shadow:1px 2px 0 #b7a89440;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;position:relative;color:var(--ink);font:inherit;cursor:pointer;padding:7px;touch-action:manipulation;transition:background .15s,transform .15s}
+.tile:active{transform:scale(.97)}
+.tile[aria-pressed=true]{background:var(--selected);border-color:#91876d}
+.tile .symbol{font-size:23px;color:#927c70}
+.tile .word{font-size:clamp(13px,3.4vw,17px);line-height:1.35;word-break:keep-all;text-align:center}
+.tile .check{position:absolute;right:5px;top:2px;font-size:17px;color:#6d5848}
+.progress-track{height:8px;background:#e3d9c9;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:14px 0}
+.progress-fill{height:100%;width:0;background:#8e8971;transition:width .2s}
+.note{text-align:center;font-size:13px;color:var(--muted);margin:18px 0 5px}
+.complete{text-align:center;min-height:29px;color:#856950;font-size:21px}
+.actions{display:flex;gap:8px;margin-top:12px}
+.actions button{flex:1;background:transparent;border:1px solid #b5a38d;color:var(--ink);padding:11px 5px;font:inherit;font-size:13px;cursor:pointer}
+.actions .primary{background:#675348;color:#fffaf0;border-color:#675348}
+.footer{text-align:center;font-size:12px;letter-spacing:1px;color:var(--muted);margin-top:22px}
+.tip{max-width:470px;margin:16px auto 0;padding:10px;background:#fbf6eddb;text-align:center;font-size:12px;color:#665649;line-height:1.8}
+@media(min-width:600px){body{padding-top:42px}.sheet{padding:32px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<main class="sheet">
+<div class="topline">A LITTLE PHOTO WALK · 2026</div>
+<header class="hero"><div class="doodle" aria-hidden="true">✳︎ ♡ ✳︎</div><h1>연희의 작은 발견</h1><p>YEONHUI PHOTO WALK · BINGO</p></header>
+<div class="rule"></div>
+<section class="stats" aria-label="빙고 진행 상황"><div class="stat"><strong id="done">0 / 9</strong><span>촬영 완료</span></div><div class="stat"><strong id="lines">0</strong><span>완성된 빙고</span></div><div class="stat"><strong id="percent">0%</strong><span>진행률</span></div></section>
+<section id="board" class="board" aria-label="골목 출사 빙고판">
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">⌂</span><span class="word">오래된 간판</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">☀</span><span class="word">햇살 한 조각</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">♥</span><span class="word">빨간 포인트</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">✉</span><span class="word">누군가의 취향</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">❀</span><span class="word">담장 너머 초록</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">№</span><span class="word">작은 글씨</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">♧</span><span class="word">나란히 둘</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">◈</span><span class="word">시간의 흔적</span><span class="check"></span></button>
+<button type="button" class="tile" aria-pressed="false"><span class="symbol">✧</span><span class="word">우연한 만남</span><span class="check"></span></button>
 </section>
- <div class="progress-track" role="progressbar" aria-label="촬영 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress"><div class="progress-fill" id="progressFill"></div></div>
- <p class="note">발견한 순간을 사진에 담고, 해당 칸을 눌러주세요.</p>
- <div id="complete" class="complete" role="status" aria-live="polite"></div>
- <div class="actions"><button class="primary" id="share">친구에게 링크 공유 ↗</button><button id="reset">처음부터 다시</button></div>
- <div class="footer">COLLECT MOMENTS, NOT THINGS. ♡</div>
+<div class="progress-track" id="progress" role="progressbar" aria-label="촬영 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+<p class="note">발견한 순간을 사진에 담고, 해당 칸을 눌러주세요.</p><div class="complete" id="complete" role="status" aria-live="polite"></div>
+<div class="actions"><button class="primary" id="share">친구에게 링크 공유 ↗</button><button id="reset">처음부터 다시</button></div>
+<div class="footer">COLLECT MOMENTS, NOT THINGS. ♡</div>
 </main>
-<p class="tip">각자의 체크 기록은 이 기기의 브라우저에만 저장돼요.<br>같은 링크로 접속해도 다른 팀원의 기록은 보이지 않아요.</p>
+<p class="tip">각자의 체크 기록은 이 기기의 브라우저에만 저장돼요.<br>다른 팀원의 기록은 공유되지 않아요.</p>
 <script>
-(function () {
-  'use strict';
-  var storageKey = 'yeonhui-photo-bingo-v1';
-  var tiles = document.querySelectorAll('#board .tile');
-  var winLines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-  var checked = [];
-  try {
-    var saved = JSON.parse(window.localStorage.getItem(storageKey) || '[]');
-    if (Array.isArray(saved)) {
-      for (var i=0;i<saved.length;i++) {
-        if (typeof saved[i] === 'number' && saved[i] >= 0 && saved[i] < 9 && checked.indexOf(saved[i]) === -1) checked.push(saved[i]);
-      }
-    }
-  } catch (err) { /* Storage may be disabled in preview environments. */ }
-  function persist() { try { window.localStorage.setItem(storageKey, JSON.stringify(checked)); } catch (err) {} }
-  function render() {
-    var bingo = 0;
-    for (var k=0;k<winLines.length;k++) {
-      var complete = true;
-      for (var j=0;j<3;j++) if (checked.indexOf(winLines[k][j]) === -1) complete=false;
-      if (complete) bingo++;
-    }
-    for (var t=0;t<tiles.length;t++) {
-      var selected = checked.indexOf(t) !== -1;
-      tiles[t].setAttribute('aria-pressed', selected ? 'true' : 'false');
-      tiles[t].querySelector('.check').textContent = selected ? '✓' : '';
-    }
-    var pct = Math.round(checked.length * 100 / 9);
-    document.getElementById('done').textContent = checked.length + ' / 9';
-    document.getElementById('lines').textContent = String(bingo);
-    document.getElementById('percent').textContent = pct + '%';
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progress').setAttribute('aria-valuenow', String(pct));
-    document.getElementById('complete').textContent = checked.length === 9 ? '모든 순간을 발견했어요! ♡' : bingo > 0 ? '✧ 빙고 ' + bingo + '줄 완성! ✧' : '';
-  }
-  for (var n=0;n<tiles.length;n++) {
-    (function(index) {
-      tiles[index].addEventListener('click', function() {
-        var pos = checked.indexOf(index);
-        if (pos === -1) checked.push(index); else checked.splice(pos,1);
-        persist(); render();
-      });
-    })(n);
-  }
-  document.getElementById('reset').addEventListener('click', function() {
-    if (window.confirm('촬영 완료 기록을 모두 지울까요?')) { checked=[]; persist(); render(); }
-  });
-  document.getElementById('share').addEventListener('click', function() {
-    var url = window.location.href;
-    if (navigator.share) {
-      navigator.share({title:'연희의 작은 발견 — 출사 빙고',text:'우리 함께 골목 출사 빙고 해요 📷',url:url}).catch(function(){});
-    } else { window.prompt('이 링크를 복사해서 공유하세요',url); }
-  });
-  render();
+(function(){
+'use strict';
+var storageKey='yeonhui-photo-bingo-v1';
+var tiles=document.querySelectorAll('#board .tile');
+var winLines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+var checked=[];
+try{var saved=JSON.parse(localStorage.getItem(storageKey)||'[]');if(Array.isArray(saved)){for(var i=0;i<saved.length;i++){if(typeof saved[i]==='number'&&saved[i]>=0&&saved[i]<9&&checked.indexOf(saved[i])===-1)checked.push(saved[i]);}}}catch(e){}
+function persist(){try{localStorage.setItem(storageKey,JSON.stringify(checked));}catch(e){}}
+function render(){
+var bingo=0;
+for(var k=0;k<winLines.length;k++){var complete=true;for(var j=0;j<3;j++)if(checked.indexOf(winLines[k][j])===-1)complete=false;if(complete)bingo++;}
+for(var t=0;t<tiles.length;t++){var selected=checked.indexOf(t)!==-1;tiles[t].setAttribute('aria-pressed',selected?'true':'false');tiles[t].querySelector('.check').textContent=selected?'✓':'';}
+var pct=Math.round(checked.length*100/9);
+document.getElementById('done').textContent=checked.length+' / 9';
+document.getElementById('lines').textContent=String(bingo);
+document.getElementById('percent').textContent=pct+'%';
+document.getElementById('progressFill').style.width=pct+'%';
+document.getElementById('progress').setAttribute('aria-valuenow',String(pct));
+document.getElementById('complete').textContent=checked.length===9?'모든 순간을 발견했어요! ♡':bingo>0?'✧ 빙고 '+bingo+'줄 완성! ✧':'';
+}
+for(var n=0;n<tiles.length;n++){(function(index){tiles[index].addEventListener('click',function(){var pos=checked.indexOf(index);if(pos===-1)checked.push(index);else checked.splice(pos,1);persist();render();});})(n);}
+document.getElementById('reset').addEventListener('click',function(){if(confirm('촬영 완료 기록을 모두 지울까요?')){checked=[];persist();render();}});
+document.getElementById('share').addEventListener('click',function(){var url=location.href;if(navigator.share){navigator.share({title:'연희의 작은 발견 — 출사 빙고',text:'우리 함께 골목 출사 빙고 해요 📷',url:url}).catch(function(){});}else{prompt('이 링크를 복사해서 공유하세요',url);}});
+render();
 })();
-</script>
-</body></html>
+</script></body></html>
