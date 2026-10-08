@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ede3d4"><title>연희의 작은 발견 | PHOTO BINGO</title>
+<meta name="theme-color" content="#ede3d4"><title>SUNMERRY-BINGO | YEONHUI-DONG</title>
 <style>
 @font-face{font-family:Griun;src:url('./Griun_Offoffonoff.ttf') format('truetype');font-display:swap}
 :root{--ink:#53453b;--muted:#827467;--line:#c5b5a2;--selected:#c9c4a7}
@@ -10,7 +10,7 @@ body{margin:0;min-height:100vh;padding:25px 15px 38px;background:#d9c9bb url('./
 .sheet{max-width:470px;margin:auto;background:rgba(250,246,235,.95);border:1px solid #e6d9c5;box-shadow:0 10px 34px #44312335;padding:26px 20px 24px;position:relative}
 .topline{text-align:center;font-size:12px;letter-spacing:2px;color:var(--muted)}
 .hero{text-align:center;margin:13px 0 18px}
-.hero h1{font-size:clamp(34px,9vw,46px);font-weight:400;line-height:1.3;margin:5px 0}
+.hero h1{font-size:clamp(29px,7.7vw,42px);font-weight:400;line-height:1.3;margin:5px 0}
 .hero p{font-size:12px;letter-spacing:1.5px;margin:3px 0}
 .doodle{font-size:22px;letter-spacing:12px;color:#95806d}
 .rule{height:1px;background:var(--line);margin:18px 0}
@@ -36,10 +36,24 @@ body{margin:0;min-height:100vh;padding:25px 15px 38px;background:#d9c9bb url('./
 .tip{max-width:470px;margin:16px auto 0;padding:10px;background:#fbf6eddb;text-align:center;font-size:12px;color:#665649;line-height:1.8}
 @media(min-width:600px){body{padding-top:42px}.sheet{padding:32px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style></head><body>
+
+/* Completed bingo celebration */
+.page-content{transition:filter .35s ease,transform .35s ease}
+body.celebrating .page-content{filter:blur(7px);transform:scale(.99);pointer-events:none;user-select:none}
+.celebration{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(58,45,43,.38);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+.celebration.is-open{opacity:1;visibility:visible}
+.celebration-card{position:relative;width:min(100%,370px);padding:38px 22px 30px;text-align:center;background:#faf2e3;border:1px solid #d8c5b2;box-shadow:0 15px 60px #392b2c55;transform:translateY(20px) scale(.92);transition:transform .35s ease}
+.celebration.is-open .celebration-card{transform:translateY(0) scale(1)}
+.celebration-sparkles{color:#97866c;font-size:24px;letter-spacing:13px;animation:sparkle 1.2s ease-in-out infinite alternate}
+.celebration-title{font-size:clamp(58px,17vw,84px);line-height:1.1;margin:13px 0 15px;color:#715063;font-weight:400;letter-spacing:2px}
+.celebration-message{font-size:20px;line-height:1.6;margin:0 0 24px;color:#5b4c41}
+.celebration-close{border:0;background:#675348;color:#fff9ed;font:inherit;font-size:18px;padding:12px 34px;min-width:160px;cursor:pointer}
+@keyframes sparkle{from{opacity:.55;transform:scale(.94)}to{opacity:1;transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.celebration-sparkles{animation:none}}
+</style></head><body><div class="page-content">
 <main class="sheet">
 <div class="topline">A LITTLE PHOTO WALK · 2026</div>
-<header class="hero"><div class="doodle" aria-hidden="true">✳︎ ♡ ✳︎</div><h1>연희의 작은 발견</h1><p>YEONHUI PHOTO WALK · BINGO</p></header>
+<header class="hero"><div class="doodle" aria-hidden="true">✳︎ ♡ ✳︎</div><h1>SUNMERRY-BINGO</h1><p>• YEONHUI-DONG •</p></header>
 <div class="rule"></div>
 <section class="stats" aria-label="빙고 진행 상황"><div class="stat"><strong id="done">0 / 9</strong><span>촬영 완료</span></div><div class="stat"><strong id="lines">0</strong><span>완성된 빙고</span></div><div class="stat"><strong id="percent">0%</strong><span>진행률</span></div></section>
 <section id="board" class="board" aria-label="골목 출사 빙고판">
@@ -59,6 +73,15 @@ body{margin:0;min-height:100vh;padding:25px 15px 38px;background:#d9c9bb url('./
 <div class="footer">COLLECT MOMENTS, NOT THINGS. ♡</div>
 </main>
 <p class="tip">각자의 체크 기록은 이 기기의 브라우저에만 저장돼요.<br>다른 팀원의 기록은 공유되지 않아요.</p>
+</div>
+<div id="celebration" class="celebration" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle" aria-hidden="true">
+  <div class="celebration-card">
+    <div class="celebration-sparkles" aria-hidden="true">✧ ♡ ✦</div>
+    <h2 class="celebration-title" id="celebrationTitle">BINGO!</h2>
+    <p class="celebration-message" id="celebrationMessage">모든 촬영 완료!<br>가을의 순간들을 모았어요 ♡</p>
+    <button type="button" class="celebration-close" id="celebrationClose">확인하기</button>
+  </div>
+</div>
 <script>
 (function(){
 'use strict';
@@ -66,6 +89,26 @@ var storageKey='yeonhui-photo-bingo-v1';
 var tiles=document.querySelectorAll('#board .tile');
 var winLines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 var checked=[];
+var celebration=document.getElementById('celebration');
+var celebrationClose=document.getElementById('celebrationClose');
+var previousFocus=null;
+function showCelebration(){
+  previousFocus=document.activeElement;
+  document.getElementById('celebrationMessage').innerHTML=lines===1?'모든 촬영 완료!<br>가을의 순간들을 모았어요 ♡':lines+'줄 빙고 완성!<br>가을의 순간들을 모았어요 ♡';
+  celebration.classList.add('is-open');
+  celebration.setAttribute('aria-hidden','false');
+  document.body.classList.add('celebrating');
+  celebrationClose.focus();
+}
+function hideCelebration(){
+  celebration.classList.remove('is-open');
+  celebration.setAttribute('aria-hidden','true');
+  document.body.classList.remove('celebrating');
+  if(previousFocus&&previousFocus.focus)previousFocus.focus();
+}
+celebrationClose.addEventListener('click',hideCelebration);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&celebration.classList.contains('is-open'))hideCelebration();});
+
 try{var saved=JSON.parse(localStorage.getItem(storageKey)||'[]');if(Array.isArray(saved)){for(var i=0;i<saved.length;i++){if(typeof saved[i]==='number'&&saved[i]>=0&&saved[i]<9&&checked.indexOf(saved[i])===-1)checked.push(saved[i]);}}}catch(e){}
 function persist(){try{localStorage.setItem(storageKey,JSON.stringify(checked));}catch(e){}}
 function render(){
@@ -80,9 +123,14 @@ document.getElementById('progressFill').style.width=pct+'%';
 document.getElementById('progress').setAttribute('aria-valuenow',String(pct));
 document.getElementById('complete').textContent=checked.length===9?'모든 순간을 발견했어요! ♡':bingo>0?'✧ 빙고 '+bingo+'줄 완성! ✧':'';
 }
-for(var n=0;n<tiles.length;n++){(function(index){tiles[index].addEventListener('click',function(){var pos=checked.indexOf(index);if(pos===-1)checked.push(index);else checked.splice(pos,1);persist();render();});})(n);}
+for(var n=0;n<tiles.length;n++){(function(index){tiles[index].addEventListener('click',function(){
+var wasComplete=checked.length===9;
+var pos=checked.indexOf(index);if(pos===-1)checked.push(index);else checked.splice(pos,1);
+persist();render();
+if(!wasComplete&&checked.length===9)showCelebration();
+});})(n);}
 document.getElementById('reset').addEventListener('click',function(){if(confirm('촬영 완료 기록을 모두 지울까요?')){checked=[];persist();render();}});
-document.getElementById('share').addEventListener('click',function(){var url=location.href;if(navigator.share){navigator.share({title:'연희의 작은 발견 — 출사 빙고',text:'우리 함께 골목 출사 빙고 해요 📷',url:url}).catch(function(){});}else{prompt('이 링크를 복사해서 공유하세요',url);}});
+document.getElementById('share').addEventListener('click',function(){var url=location.href;if(navigator.share){navigator.share({title:'SUNMERRY-BINGO — YEONHUI-DONG',text:'우리 함께 골목 출사 빙고 해요 📷',url:url}).catch(function(){});}else{prompt('이 링크를 복사해서 공유하세요',url);}});
 render();
 })();
 </script></body></html>
